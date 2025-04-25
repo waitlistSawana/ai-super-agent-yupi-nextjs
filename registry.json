@@ -1,0 +1,46 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "sawana-huang's-shadcn-ui-registry",
+  "homepage": "/",
+  "author": "Sawana Huang <hsawana9@gmail.com>",
+  "items": [
+    {
+      "name": "dashscrop-ai-provider",
+      "type": "registry:lib",
+      "title": "Dashscrop ai provider for ai sdk",
+      "description": "Set up dashscrop ai provider for ai sdk. Add model provider to lib. Build with ai-sdk/openai-compatible",
+      "dependencies": [
+        "@ai-sdk/openai-compatible",
+        "@ai-sdk/provider",
+        "@ai-sdk/provider-utils"
+      ],
+      "files": [
+        {
+          "path": "src/lib/ai/providers/dashscope.ts",
+          "type": "registry:lib",
+          "target": "./lib/ai/providers/dashscope.ts"
+        }
+      ]
+    },
+    {
+      "name": "nextjs-generate-text-api-and-component-for-dashscrop-ai-provider",
+      "type": "registry:page",
+      "title": "NextJS Text Generation API and Component with Dashscope AI Integration",
+      "description": "A basic implementation of text generation functionality using Dashscope AI provider. Includes both API endpoint and React component for seamless integration with NextJS applications. Built with Vercel AI SDK.",
+      "dependencies": [
+        "ai"
+      ],
+      "files": [
+        {
+          "path": "src/components/generate-text-demo.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/app/api/v1/generate-text/route.ts",
+          "type": "registry:page",
+          "target": "./app/api/v1/generate-text/route.ts"
+        }
+      ]
+    }
+  ]
+}

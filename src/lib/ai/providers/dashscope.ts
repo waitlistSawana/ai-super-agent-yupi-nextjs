@@ -8,6 +8,11 @@
  *
  * @see https://bailian.console.aliyun.com/?tab=api#/api/?type=model&url=https%3A%2F%2Fhelp.aliyun.com%2Fdocument_detail%2F2833609.html&renderType=iframe
  * @see https://sdk.vercel.ai/providers/openai-compatible-providers/custom-providers
+ *
+ * IMPORTANT:
+ * - The model ids should be defined manually
+ * - Model id types: chat, completion, embedding, and image
+ * - Add "DASHSCOPE_API_KEY" in your .env file
  */
 
 /**
@@ -21,9 +26,6 @@ export const DASHSCOPE_ENVIRONMENT_VARIABLE_NAME = "DASHSCOPE_API_KEY";
  * 1. Define chat model IDs and settings
  * example-chat-settings.ts
  *
- * IMPORTANT:
- * - The model ids should be defined manually
- * - Model id types: chat, completion, embedding, and image
  */
 import { type OpenAICompatibleChatSettings } from "@ai-sdk/openai-compatible";
 

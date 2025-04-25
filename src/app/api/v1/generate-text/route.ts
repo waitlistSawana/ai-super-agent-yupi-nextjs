@@ -1,5 +1,6 @@
 /**
  * generateText Route
+ *
  * @author Sawana Huang
  *
  * @see https://sdk.vercel.ai/docs/ai-sdk-core/generating-text
@@ -7,7 +8,9 @@
  */
 import { NextResponse, type NextRequest } from "next/server";
 import { generateText } from "ai";
+
 import { dashscope } from "@/lib/ai/providers/dashscope";
+// or
 // import { deepseek } from '@ai-sdk/deepseek';
 
 export interface GenerateTextPostRequestBody {

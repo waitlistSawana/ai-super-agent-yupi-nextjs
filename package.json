@@ -17,7 +17,8 @@
     "lint:fix": "next lint --fix",
     "preview": "next build && next start",
     "start": "next start",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "registry:build": "shadcn build"
   },
   "dependencies": {
     "@ai-sdk/deepseek": "^0.2.13",
