@@ -10,8 +10,6 @@ import { NextResponse, type NextRequest } from "next/server";
 import { generateText } from "ai";
 
 import { dashscope } from "@/lib/ai/providers/dashscope";
-// or
-// import { deepseek } from '@ai-sdk/deepseek';
 
 export interface GenerateTextPostRequestBody {
   prompt: string;

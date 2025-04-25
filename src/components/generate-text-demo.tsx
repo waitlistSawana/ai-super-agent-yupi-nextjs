@@ -7,7 +7,7 @@
  *
  * @example use it in your component
  * import GenerateTextDemo from "@/components/generate-text-demo";
- * 
+ *
  * <GenerateTextDemo />
  */
 "use client";
@@ -46,7 +46,9 @@ export default function GenerateTextDemo({
             setGeneration(json.text);
           } catch (error) {
             console.error("Error generating text:", error);
-            setGeneration("Unable to generate text at the moment. Please refresh and try again.");
+            setGeneration(
+              "Unable to generate text at the moment. Please refresh and try again.",
+            );
           } finally {
             setIsLoading(false);
           }

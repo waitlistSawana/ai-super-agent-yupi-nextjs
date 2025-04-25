@@ -21,7 +21,6 @@
     "registry:build": "shadcn build"
   },
   "dependencies": {
-    "@ai-sdk/deepseek": "^0.2.13",
     "@ai-sdk/openai-compatible": "^0.2.13",
     "@ai-sdk/provider": "^1.1.3",
     "@ai-sdk/provider-utils": "^2.2.7",
@@ -52,6 +51,7 @@
     "postcss": "^8.5.3",
     "prettier": "^3.5.3",
     "prettier-plugin-tailwindcss": "^0.6.11",
+    "shadcn": "2.5.0-canary.1",
     "tailwindcss": "^4.0.15",
     "tw-animate-css": "^1.2.8",
     "typescript": "^5.8.2",
