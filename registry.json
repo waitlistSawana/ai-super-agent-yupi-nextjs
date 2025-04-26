@@ -23,6 +23,24 @@
       ]
     },
     {
+      "name": "sealos-ai-provider",
+      "type": "registry:lib",
+      "title": "Sealos AI provider for ai sdk",
+      "description": "Set up Sealos AI provider for ai sdk. Add model provider to lib. Build with ai-sdk/openai-compatible",
+      "dependencies": [
+        "@ai-sdk/openai-compatible",
+        "@ai-sdk/provider",
+        "@ai-sdk/provider-utils"
+      ],
+      "files": [
+        {
+          "path": "src/lib/ai/providers/sealos.ts",
+          "type": "registry:lib",
+          "target": "./lib/ai/providers/sealos.ts"
+        }
+      ]
+    },
+    {
       "name": "nextjs-generate-text-api-and-component-for-dashscrop-ai-provider",
       "type": "registry:page",
       "title": "NextJS Text Generation API and Component with Dashscope AI Integration",

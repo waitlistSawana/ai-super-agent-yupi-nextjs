@@ -10,6 +10,7 @@ import { NextResponse, type NextRequest } from "next/server";
 import { generateText } from "ai";
 
 import { dashscope } from "@/lib/ai/providers/dashscope";
+import { sealos } from "@/lib/ai/providers/sealos";
 
 export interface GenerateTextPostRequestBody {
   prompt: string;
@@ -23,7 +24,7 @@ export async function POST(request: NextRequest) {
   const { prompt } = (await request.json()) as GenerateTextPostRequestBody;
 
   const result = await generateText({
-    model: dashscope("deepseek-v3"),
+    model: sealos("deepseek-chat-0324"),
     system: "You are a helpful assistant.",
     prompt: prompt,
   });
