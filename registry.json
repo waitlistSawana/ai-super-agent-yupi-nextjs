@@ -59,6 +59,27 @@
           "target": "./app/api/v1/generate-text/route.ts"
         }
       ]
+    },
+    {
+      "name": "nextjs-chat-bot-component-and-api",
+      "type": "registry:page",
+      "title": "NextJS Chat Bot Component with AI Integration",
+      "description": "A comprehensive chat bot implementation with both UI component and API endpoint. Built with Vercel AI SDK for seamless integration with NextJS applications.",
+      "dependencies": [
+        "ai",
+        "@ai-sdk/react"
+      ],
+      "files": [
+        {
+          "path": "src/components/chat-bot.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/app/api/v1/chat-bot/route.ts",
+          "type": "registry:page",
+          "target": "./app/api/v1/chat-bot/route.ts"
+        }
+      ]
     }
   ]
 }

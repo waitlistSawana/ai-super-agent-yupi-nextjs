@@ -11,10 +11,29 @@ export default function HomePage() {
             AI 超级智能体{" "}
             <span className="text-[hsl(280,100%,70%)]">NextJS</span> 版
           </h1>
-          <p>
-            支持 Shadcn UI Registry 组件{" "}
+          <p className="text-center leading-10">
+            学习自编程导航
+            <a
+              href="https://www.codefather.cn/course/1915010091721236482"
+              target="_blank"
+              className="underline underline-offset-2"
+            >
+              {" "}
+              AI超级智能体 ↗{" "}
+            </a>
+            项目，原项目后端技术栈为 JAVA 和{" "}
+            <a
+              target="_blank"
+              className="underline underline-offset-2"
+              href="https://spring.io/projects/spring-ai"
+            >
+              Spring AI ↗
+            </a>{" "}
+            。
+            <br />
+            支持 Shadcn UI Registry 快速注册组件和函数，
             <a href="#registry-list" className="underline underline-offset-2">
-              查看服务列表
+              在此查看 Registry 服务列表
             </a>
             。本项目代码已{" "}
             <a
@@ -22,9 +41,10 @@ export default function HomePage() {
               target="_blank"
               className="underline underline-offset-2"
             >
-              开源 ↗
+              Github 开源 ↗
             </a>
           </p>
+          {/* Author */}
           <div className="flex flex-col items-center justify-center gap-3">
             <div>Made with ❤ by Sawana Huang</div>
             <div className="flex flex-wrap justify-center gap-2">
@@ -34,7 +54,7 @@ export default function HomePage() {
                 asChild
               >
                 <a
-                  href="https://github.com/waitlistSawana/ai-super-agent-yupi-nextjs"
+                  href="https://github.com/waitlistSawana"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -137,7 +157,7 @@ export default function HomePage() {
                 </a>
               </Button>
 
-              <Button
+              {/* <Button
                 variant="outline"
                 className="bg-white/10 hover:bg-white/20"
                 asChild
@@ -163,9 +183,39 @@ export default function HomePage() {
                   </svg>
                   Bilibili
                 </a>
+              </Button> */}
+
+              <Button
+                variant="outline"
+                className="bg-white/10 hover:bg-white/20"
+                asChild
+              >
+                <a
+                  href="mailto:hsawana9@gmail.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <rect width="20" height="16" x="2" y="4" rx="2" />
+                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                  </svg>
+                  邮件
+                </a>
               </Button>
             </div>
           </div>
+
+          {/* Page Link Cards */}
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
             <Link
               className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 text-white hover:bg-white/20"
@@ -180,10 +230,10 @@ export default function HomePage() {
             </Link>
             <Link
               className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 text-white hover:bg-white/20"
-              href="/generate-text"
+              href="/chat-bot"
               // target="_blank"
             >
-              <h3 className="text-2xl font-bold">Generate Text →</h3>
+              <h3 className="text-2xl font-bold">Chatbot →</h3>
               <div className="text-lg">
                 Learn more about Create T3 App, the libraries it uses, and how
                 to deploy it.
@@ -196,15 +246,25 @@ export default function HomePage() {
       {/* 文档 */}
       <div className="bg-background py-16">
         <div className="container mx-auto max-w-6xl px-4">
-          <h2 className="mb-8 text-3xl font-bold tracking-tight">使用引导</h2>
+          <h2 className="mb-8 text-3xl font-bold tracking-tight">
+            Registry 使用引导
+          </h2>
 
           <div className="prose prose-gray dark:prose-invert max-w-none">
             <h3 className="text-2xl font-semibold">快速开始</h3>
             <p className="text-muted-foreground">
               在 NextJS（或其他 React 框架）项目中使用我定制好的 AI
               组件和封装函数，类型安全、通过 T3 Stack 的类型和 Eslint
-              检验。只需几个简单的步骤，向你的项目中注入写好的代码 - 像 Shadcn
-              UI 一样。
+              检验。只需几个简单的步骤，向你的项目中注入写好的代码 - 就像
+              <a
+                href="https://ui.shadcn.com/docs"
+                target="_blank"
+                className="underline underline-offset-1"
+              >
+                {" "}
+                Shadcn UI ↗{" "}
+              </a>
+              一样。
             </p>
 
             <div className="bg-muted my-6 overflow-hidden rounded-lg border">
@@ -299,68 +359,135 @@ export default function YourPage() {
       </div>
 
       {/* Registry 服务列表 */}
-      <div id="registry-list" className="bg-muted py-16">
-        <div className="container mx-auto max-w-6xl px-4">
-          <h2 className="mb-8 text-3xl font-bold tracking-tight">
-            Registry 服务列表
-          </h2>
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-            {/* 文本生成演示 */}
-            <div className="bg-card rounded-lg border p-6 shadow-sm">
-              <h3 className="mb-4 text-xl font-semibold">文本生成演示</h3>
-              <p className="text-muted-foreground mb-4">
-                基于 Dashscope AI 提供商的文本生成功能实现，包含 API 端点和
-                React 组件。
-              </p>
-              <div className="bg-muted group relative rounded-md p-3">
-                <code className="text-muted-foreground text-sm">
-                  pnpm dlx shadcn@latest add
-                  https://ai-super-agent-yupi-nextjs.hsawana9.com/r/nextjs-generate-text-api-and-component-for-dashscrop-ai-provider.json
-                </code>
-                <div className="absolute top-2 right-2 opacity-0 transition-opacity group-hover:opacity-100">
-                  <CopyButton value="pnpm dlx shadcn@latest add https://ai-super-agent-yupi-nextjs.hsawana9.com/r/nextjs-generate-text-api-and-component-for-dashscrop-ai-provider.json" />
-                </div>
+      <RegistryList />
+    </>
+  );
+}
+
+function RegistryList() {
+  return (
+    <div id="registry-list" className="bg-muted py-16">
+      <div className="container mx-auto max-w-6xl px-4">
+        <h2 className="mb-8 text-3xl font-bold tracking-tight">
+          Registry 服务列表
+        </h2>
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+          {/* 文本生成演示 */}
+          <div className="bg-card rounded-lg border p-6 shadow-sm">
+            <h3 className="mb-4 text-xl font-semibold">文本生成组件演示</h3>
+            <p className="text-muted-foreground mb-4">
+              基于 Dashscope AI 提供商的文本生成功能实现，最简版本，包含 API
+              端点和 React 组件。
+              <a
+                href="https://github.com/waitlistSawana/ai-super-agent-yupi-nextjs/blob/main/src/app/api/v1/generate-text/route.ts"
+                target="_blank"
+                className="underline underline-offset-1"
+              >
+                后端代码 ↗
+              </a>
+              和
+              <a
+                href="https://github.com/waitlistSawana/ai-super-agent-yupi-nextjs/blob/main/src/components/generate-text-demo.tsx"
+                target="_blank"
+                className="underline underline-offset-1"
+              >
+                前端组件 ↗
+              </a>
+            </p>
+            <div className="bg-muted group relative rounded-md p-3">
+              <code className="text-muted-foreground text-sm">
+                pnpm dlx shadcn@latest add
+                https://ai-super-agent-yupi-nextjs.hsawana9.com/r/nextjs-generate-text-api-and-component-for-dashscrop-ai-provider.json
+              </code>
+              <div className="absolute top-2 right-2 opacity-0 transition-opacity group-hover:opacity-100">
+                <CopyButton value="pnpm dlx shadcn@latest add https://ai-super-agent-yupi-nextjs.hsawana9.com/r/nextjs-generate-text-api-and-component-for-dashscrop-ai-provider.json" />
               </div>
             </div>
+          </div>
 
-            {/* 阿里云百炼 AI 提供商 */}
-            <div className="bg-card rounded-lg border p-6 shadow-sm">
-              <h3 className="mb-4 text-xl font-semibold">
-                阿里云百炼 AI 提供商
-              </h3>
-              <p className="text-muted-foreground mb-4">
-                为 AI SDK 设置阿里云百炼 AI 提供商，添加模型提供者到库中。
-              </p>
-              <div className="bg-muted group relative rounded-md p-3">
-                <code className="text-muted-foreground text-sm">
-                  pnpm dlx shadcn@latest add
-                  https://ai-super-agent-yupi-nextjs.hsawana9.com/r/dashscrop-ai-provider.json
-                </code>
-                <div className="absolute top-2 right-2 opacity-0 transition-opacity group-hover:opacity-100">
-                  <CopyButton value="pnpm dlx shadcn@latest add https://ai-super-agent-yupi-nextjs.hsawana9.com/r/dashscrop-ai-provider.json" />
-                </div>
+          {/* 阿里云百炼 AI 提供商 */}
+          <div className="bg-card rounded-lg border p-6 shadow-sm">
+            <h3 className="mb-4 text-xl font-semibold">阿里云百炼 AI 提供商</h3>
+            <p className="text-muted-foreground mb-4">
+              为 AI SDK 设置阿里云百炼 AI 提供商，添加模型提供者到库中。
+              <a
+                href="https://github.com/waitlistSawana/ai-super-agent-yupi-nextjs/blob/main/src/lib/ai/providers/dashscope.ts"
+                target="_blank"
+                className="underline underline-offset-1"
+              >
+                调用函数 ↗
+              </a>
+            </p>
+            <div className="bg-muted group relative rounded-md p-3">
+              <code className="text-muted-foreground text-sm">
+                pnpm dlx shadcn@latest add
+                https://ai-super-agent-yupi-nextjs.hsawana9.com/r/dashscrop-ai-provider.json
+              </code>
+              <div className="absolute top-2 right-2 opacity-0 transition-opacity group-hover:opacity-100">
+                <CopyButton value="pnpm dlx shadcn@latest add https://ai-super-agent-yupi-nextjs.hsawana9.com/r/dashscrop-ai-provider.json" />
               </div>
             </div>
+          </div>
 
-            {/* Sealos AI 提供商 */}
-            <div className="bg-card rounded-lg border p-6 shadow-sm">
-              <h3 className="mb-4 text-xl font-semibold">Sealos AI 提供商</h3>
-              <p className="text-muted-foreground mb-4">
-                为 AI SDK 设置 Sealos AI 提供商，添加模型提供者到库中。
-              </p>
-              <div className="bg-muted group relative rounded-md p-3">
-                <code className="text-muted-foreground text-sm">
-                  pnpm dlx shadcn@latest add
-                  http://localhost:3000/r/sealos-ai-provider.json
-                </code>
-                <div className="absolute top-2 right-2 opacity-0 transition-opacity group-hover:opacity-100">
-                  <CopyButton value="pnpm dlx shadcn@latest add http://localhost:3000/r/sealos-ai-provider.json" />
-                </div>
+          {/* Sealos AI 提供商 */}
+          <div className="bg-card rounded-lg border p-6 shadow-sm">
+            <a href="" target="_blank"></a>
+            <h3 className="mb-4 text-xl font-semibold">Sealos AI 提供商</h3>
+            <p className="text-muted-foreground mb-4">
+              为 AI SDK 设置 Sealos AI 提供商，添加模型提供者到库中。
+              <a
+                href="https://github.com/waitlistSawana/ai-super-agent-yupi-nextjs/blob/main/src/lib/ai/providers/sealos.ts"
+                target="_blank"
+                className="underline underline-offset-1"
+              >
+                调用函数 ↗
+              </a>
+            </p>
+            <div className="bg-muted group relative rounded-md p-3">
+              <code className="text-muted-foreground text-sm">
+                pnpm dlx shadcn@latest add
+                http://localhost:3000/r/sealos-ai-provider.json
+              </code>
+              <div className="absolute top-2 right-2 opacity-0 transition-opacity group-hover:opacity-100">
+                <CopyButton value="pnpm dlx shadcn@latest add http://localhost:3000/r/sealos-ai-provider.json" />
+              </div>
+            </div>
+          </div>
+
+          {/* 聊天机器人组件 */}
+          <div className="bg-card rounded-lg border p-6 shadow-sm">
+            <h3 className="mb-4 text-xl font-semibold">聊天机器人组件</h3>
+            <p className="text-muted-foreground mb-4">
+              完整的聊天机器人实现，包含 UI 组件和 API 端点。基于 Vercel AI SDK
+              构建，可无缝集成到 NextJS 应用中。
+              <a
+                href="https://github.com/waitlistSawana/ai-super-agent-yupi-nextjs/blob/main/src/app/api/v1/chat-bot/route.ts"
+                target="_blank"
+                className="underline underline-offset-1"
+              >
+                后端代码 ↗
+              </a>
+              和
+              <a
+                href="https://github.com/waitlistSawana/ai-super-agent-yupi-nextjs/blob/main/src/components/chat-bot.tsx"
+                target="_blank"
+                className="underline underline-offset-1"
+              >
+                前端组件 ↗
+              </a>
+            </p>
+            <div className="bg-muted group relative rounded-md p-3">
+              <code className="text-muted-foreground text-sm">
+                pnpm dlx shadcn@latest add
+                https://ai-super-agent-yupi-nextjs.hsawana9.com/r/nextjs-chat-bot-component-and-api.json
+              </code>
+              <div className="absolute top-2 right-2 opacity-0 transition-opacity group-hover:opacity-100">
+                <CopyButton value="pnpm dlx shadcn@latest add https://ai-super-agent-yupi-nextjs.hsawana9.com/r/nextjs-chat-bot-component-and-api.json" />
               </div>
             </div>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
