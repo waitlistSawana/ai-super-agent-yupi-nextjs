@@ -15,7 +15,7 @@ export default function HomePage() {
           <p className="text-center leading-10">
             学习自编程导航
             <a
-              href="https://www.codefather.cn/course/1915010091721236482"
+              href="https://www.codefather.cn/course/1915010091721236482?shareCode=ic0a3g"
               target="_blank"
               className="underline underline-offset-2"
             >
@@ -137,7 +137,7 @@ export default function HomePage() {
                 asChild
               >
                 <a
-                  href="https://www.codefather.cn/user/1857029075076202498"
+                  href="https://www.codefather.cn/user/1857029075076202498?shareCode=ic0a3g"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -246,6 +246,19 @@ export default function HomePage() {
               // target="_blank"
             >
               <h3 className="text-2xl font-bold">Chatbot with Middleware →</h3>
+              <div className="text-lg">
+                Learn more about Create T3 App, the libraries it uses, and how
+                to deploy it.
+              </div>
+            </Link>
+            <Link
+              className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 text-white hover:bg-white/20"
+              href="/object-generation-notification"
+              // target="_blank"
+            >
+              <h3 className="text-2xl font-bold">
+                Object Generation Notification →
+              </h3>
               <div className="text-lg">
                 Learn more about Create T3 App, the libraries it uses, and how
                 to deploy it.

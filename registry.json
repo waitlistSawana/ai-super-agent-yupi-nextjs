@@ -106,6 +106,33 @@
           "target": "./app/api/v1/chat-bot-with-middleware/route.ts"
         }
       ]
+    },
+    {
+      "name": "nextjs-object-generation-notification",
+      "type": "registry:page",
+      "title": "NextJS Object Generation Notification Component",
+      "description": "A component for generating structured notification objects using AI. Includes schema definition, UI component, and API endpoint. Built with Vercel AI SDK's object generation feature.",
+      "dependencies": [
+        "ai",
+        "@ai-sdk/react",
+        "zod"
+      ],
+      "files": [
+        {
+          "path": "src/lib/ai/object-generation/schema.ts",
+          "type": "registry:lib",
+          "target": "./lib/ai/object-generation/schema.ts"
+        },
+        {
+          "path": "src/components/object-generation-notification.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/app/api/v1/object-generation/notification/route.ts",
+          "type": "registry:page",
+          "target": "./app/api/v1/object-generation/notification/route.ts"
+        }
+      ]
     }
   ]
 }

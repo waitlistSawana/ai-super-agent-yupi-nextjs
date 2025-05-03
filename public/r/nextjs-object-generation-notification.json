@@ -1,0 +1,31 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "nextjs-object-generation-notification",
+  "type": "registry:page",
+  "title": "NextJS Object Generation Notification Component",
+  "description": "A component for generating structured notification objects using AI. Includes schema definition, UI component, and API endpoint. Built with Vercel AI SDK's object generation feature.",
+  "dependencies": [
+    "ai",
+    "@ai-sdk/react",
+    "zod"
+  ],
+  "files": [
+    {
+      "path": "src/lib/ai/object-generation/schema.ts",
+      "content": "/**\n * Object Generation\n *\n * @see https://ai-sdk.dev/docs/ai-sdk-ui/object-generation\n */\n\nimport { z } from \"zod\";\n\n// define a schema for the notifications\nexport const notificationSchema = z.object({\n  notifications: z.array(\n    z.object({\n      name: z.string().describe(\"Name of a fictional person.\"),\n      message: z.string().describe(\"Message. Do not use emojis or links.\"),\n    }),\n  ),\n});\n",
+      "type": "registry:lib",
+      "target": "./lib/ai/object-generation/schema.ts"
+    },
+    {
+      "path": "src/components/object-generation-notification.tsx",
+      "content": "/**\n * Object Generation\n *\n * @see https://ai-sdk.dev/docs/ai-sdk-ui/object-generation\n */\n\n\"use client\";\n\nimport { notificationSchema } from \"@/lib/ai/object-generation/schema\";\nimport { experimental_useObject as useObject } from \"@ai-sdk/react\";\n\nexport default function ObjectGenerationNotification() {\n  const { isLoading, stop, error, object, submit } = useObject({\n    api: \"/api/v1/object-generation/notification\",\n    schema: notificationSchema,\n    onFinish({ object, error }) {\n      // typed object, undefined if schema validation fails:\n      console.log(\"Object generation completed:\", object);\n\n      // error, undefined if schema validation succeeds:\n      console.log(\"Schema validation error:\", error);\n    },\n    onError(error) {\n      // error during fetch request:\n      console.error(\"An error occurred:\", error);\n    },\n  });\n\n  return (\n    <div>\n      {isLoading && (\n        <button type=\"button\" onClick={() => stop()}>\n          Stop{\" \"}\n        </button>\n      )}\n\n      {error && <div>An error occurred.</div>}\n\n      <button onClick={() => submit(\"Messages during finals week.\")}>\n        Generate notifications\n      </button>\n\n      {object?.notifications?.map((notification, index) => (\n        <div key={index}>\n          <p>{notification?.name}</p>\n          <p>{notification?.message}</p>\n        </div>\n      ))}\n    </div>\n  );\n}\n",
+      "type": "registry:component"
+    },
+    {
+      "path": "src/app/api/v1/object-generation/notification/route.ts",
+      "content": "/**\n * Object Generation\n *\n * @see https://ai-sdk.dev/docs/ai-sdk-ui/object-generation\n */\n\nimport { notificationSchema } from \"@/lib/ai/object-generation/schema\";\nimport { dashscope } from \"@/lib/ai/providers/dashscope\";\nimport { streamObject } from \"ai\";\nimport { type NextRequest } from \"next/server\";\n\n// Allow streaming responses up to 30 seconds\nexport const maxDuration = 30;\n\n// export interface PostRequestBody {\n//   message: string;\n// }\n\nexport async function POST(request: NextRequest) {\n  const context = (await request.json()) as string | undefined;\n\n  console.log({ context });\n\n  const result = streamObject({\n    model: dashscope(\"qwen-plus\"),\n    schema: notificationSchema,\n    prompt:\n      `Generate 3 notifications for a messages app in this context:` + context,\n  });\n\n  return result.toTextStreamResponse();\n}\n",
+      "type": "registry:page",
+      "target": "./app/api/v1/object-generation/notification/route.ts"
+    }
+  ]
+}
