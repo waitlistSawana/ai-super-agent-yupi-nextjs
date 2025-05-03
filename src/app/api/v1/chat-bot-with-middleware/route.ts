@@ -11,7 +11,7 @@
 
 import { NextResponse, type NextRequest } from "next/server";
 import { streamText, type UIMessage } from "ai";
-import { dashscope } from "@/lib/ai/providers/dashscope";
+import { loggingModel } from "@/lib/ai/llm-middleware/dashscope";
 
 // Allow streaming responses up to 30 seconds
 export const maxDuration = 30;
@@ -41,7 +41,7 @@ export async function POST(request: NextRequest) {
   const result = streamText({
     // You can use any model you want.
     // see: https://ai-sdk.dev/providers/ai-sdk-providers
-    model: dashscope("deepseek-v3"),
+    model: loggingModel,
     system: "You are a helpful assistant.",
     messages,
   });

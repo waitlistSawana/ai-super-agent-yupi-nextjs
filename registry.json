@@ -80,6 +80,32 @@
           "target": "./app/api/v1/chat-bot/route.ts"
         }
       ]
+    },
+    {
+      "name": "nextjs-chat-bot-with-middleware",
+      "type": "registry:page",
+      "title": "NextJS Chat Bot with LLM Middleware",
+      "description": "An advanced chat bot implementation with LLM middleware support. Includes UI component, API endpoint, and middleware handlers for enhanced AI interactions. Built with Vercel AI SDK.",
+      "dependencies": [
+        "ai",
+        "@ai-sdk/react"
+      ],
+      "files": [
+        {
+          "path": "src/lib/ai/llm-middleware/dashscope.ts",
+          "type": "registry:lib",
+          "target": "./lib/ai/llm-middleware/dashscope.ts"
+        },
+        {
+          "path": "src/components/chat-bot-with-middleware.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/app/api/v1/chat-bot-with-middleware/route.ts",
+          "type": "registry:page",
+          "target": "./app/api/v1/chat-bot-with-middleware/route.ts"
+        }
+      ]
     }
   ]
 }
