@@ -1,10 +1,9 @@
 "use client";
 
-import * as React from "react";
-import { unstable_ViewTransition as ViewTransition } from "react";
 import { Button } from "@/components/ui/button";
-import { Check, Copy } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Check, Copy } from "lucide-react";
+import * as React from "react";
 
 interface CopyButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {

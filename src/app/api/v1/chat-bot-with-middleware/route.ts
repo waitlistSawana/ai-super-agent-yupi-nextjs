@@ -9,9 +9,9 @@
  *
  */
 
-import { NextResponse, type NextRequest } from "next/server";
-import { streamText, type UIMessage } from "ai";
 import { loggingModel } from "@/lib/ai/llm-middleware/dashscope";
+import { streamText, type UIMessage } from "ai";
+import { type NextRequest } from "next/server";
 
 // Allow streaming responses up to 30 seconds
 export const maxDuration = 30;

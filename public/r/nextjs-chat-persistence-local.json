@@ -1,0 +1,48 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "nextjs-chat-persistence-local",
+  "type": "registry:page",
+  "title": "NextJS Chat Bot with File-based Persistence",
+  "description": "A chat bot implementation with message persistence using local file system storage. Includes UI component, API endpoint, and file-based storage utilities. Perfect for development environments and demonstrations.",
+  "dependencies": [
+    "ai",
+    "@ai-sdk/react"
+  ],
+  "files": [
+    {
+      "path": "src/lib/ai/persistence/config.ts",
+      "content": "/**\n * Consistant\n */\nexport const CHAT_MESSAGE_CLIENT_PREFIX = \"msgc\";\nexport const CHAT_MESSAGE_SERVER_PREFIX = \"msgs\";\n",
+      "type": "registry:lib",
+      "target": "./lib/ai/persistence/config.ts"
+    },
+    {
+      "path": "src/lib/ai/persistence/chat-store.ts",
+      "content": "import { generateId, type Message } from \"ai\";\n\nimport { existsSync, mkdirSync } from \"fs\";\nimport { readdir, readFile, writeFile } from \"fs/promises\";\nimport path from \"path\";\n\n/**\n * Local chat store\n */\n\nexport async function createChat(): Promise<string> {\n  // generate a unique chat ID\n  const id = generateId();\n  // create an empty chat file\n  await writeFile(getChatFile(id), \"[]\");\n  return id;\n}\n\nfunction getChatFile(id: string): string {\n  const chatDir = path.join(process.cwd(), \".chats\");\n  if (!existsSync(chatDir)) mkdirSync(chatDir, { recursive: true });\n  return path.join(chatDir, `${id}.json`);\n}\n\nexport async function listChats(): Promise<string[]> {\n  const chatDir = path.join(process.cwd(), \".chats\");\n  // if chatDir not exists, return empty array\n  if (!existsSync(chatDir)) return [];\n  // read all files in chatDir\n  const files = await readdir(chatDir);\n  // filter out non-json files\n  return files\n    .filter((file) => file.endsWith(\".json\"))\n    .map((file) => path.basename(file, \".json\"));\n}\n\nexport async function loadChat(id: string): Promise<Message[]> {\n  return JSON.parse(await readFile(getChatFile(id), \"utf8\")) as Message[];\n}\n\nexport async function saveChat({\n  id,\n  messages,\n}: {\n  id: string;\n  messages: Message[];\n}): Promise<void> {\n  const content = JSON.stringify(messages, null, 2);\n  await writeFile(getChatFile(id), content);\n}\n",
+      "type": "registry:lib",
+      "target": "./lib/ai/persistence/chat-store.ts"
+    },
+    {
+      "path": "src/components/chat-bot-persistence.tsx",
+      "content": "/**\n * Chat Component for Persistence\n *\n * @see https://ai-sdk.dev/docs/ai-sdk-ui/chatbot-message-persistence\n */\n\n\"use client\";\n\nimport { CHAT_MESSAGE_CLIENT_PREFIX } from \"@/lib/ai/persistence/config\";\nimport { type Message, useChat } from \"@ai-sdk/react\";\nimport { createIdGenerator } from \"ai\";\n\nexport default function ChatBotPersistence({\n  id,\n  initialMessages,\n}: { id?: string | undefined; initialMessages?: Message[] } = {}) {\n  const { input, handleInputChange, handleSubmit, messages } = useChat({\n    api: \"/api/v1/chat-persistence\",\n    // use the provided chat ID\n    id,\n    // initial messages if provided\n    initialMessages,\n    // send id and createdAt for each message\n    sendExtraMessageFields: true,\n    // id format for client-side messages:\n    generateId: createIdGenerator({\n      prefix: CHAT_MESSAGE_CLIENT_PREFIX,\n      size: 16,\n    }),\n  });\n\n  // simplified rendering code, extend as needed:\n  return (\n    <div>\n      {messages.map((m) => (\n        <div key={m.id}>\n          {m.role === \"user\" ? \"User: \" : \"AI: \"}\n          {m.content}\n        </div>\n      ))}\n\n      <form onSubmit={handleSubmit}>\n        <input\n          value={input}\n          placeholder=\"Type your message here...\"\n          onChange={handleInputChange}\n        />\n        <button type=\"submit\">Submit</button>\n      </form>\n    </div>\n  );\n}\n",
+      "type": "registry:component"
+    },
+    {
+      "path": "src/app/api/v1/chat-persistence/route.ts",
+      "content": "/**\n * Chat API for Persistence\n *\n * @see https://ai-sdk.dev/docs/ai-sdk-ui/chatbot-message-persistence\n */\n\nimport { saveChat } from \"@/lib/ai/persistence/chat-store\";\nimport { CHAT_MESSAGE_SERVER_PREFIX } from \"@/lib/ai/persistence/config\";\nimport { dashscope } from \"@/lib/ai/providers/dashscope\";\nimport {\n  appendResponseMessages,\n  createIdGenerator,\n  streamText,\n  type UIMessage,\n} from \"ai\";\n\nexport interface PostRequestBody {\n  id: string;\n  messages: UIMessage[];\n}\n\nexport async function POST(req: Request) {\n  const { messages, id } = (await req.json()) as PostRequestBody;\n\n  const result = streamText({\n    model: dashscope(\"qwen-turbo\"),\n    messages,\n    // store messages\n    async onFinish({ response }) {\n      await saveChat({\n        id,\n        messages: appendResponseMessages({\n          // history messages\n          messages,\n          // response messages\n          responseMessages: response.messages,\n        }),\n      });\n    },\n    // id format for server-side messages:\n    experimental_generateMessageId: createIdGenerator({\n      prefix: CHAT_MESSAGE_SERVER_PREFIX,\n      size: 16,\n    }),\n  });\n\n  return result.toDataStreamResponse();\n}\n",
+      "type": "registry:page",
+      "target": "./app/api/v1/chat-persistence/route.ts"
+    },
+    {
+      "path": "src/app/(ai-demo)/chat-persistence/page.tsx",
+      "content": "import { createChat } from \"@/lib/ai/persistence/chat-store\";\nimport { redirect } from \"next/navigation\";\n\nexport default async function ChatPersistencePage() {\n  // create a new chat\n  const id = await createChat();\n  // redirect to chat page\n  redirect(`/chat-persistence/${id}`);\n}\n",
+      "type": "registry:page",
+      "target": "./app/(ai-demo)/chat-persistence/page.tsx"
+    },
+    {
+      "path": "src/app/(ai-demo)/chat-persistence/[id]/page.tsx",
+      "content": "import ChatBotPersistence from \"@/components/chat-bot-persistence\";\nimport { listChats, loadChat } from \"@/lib/ai/persistence/chat-store\";\n\nexport default async function ChatPersistenceIdPage({\n  params,\n}: {\n  params: Promise<{ id: string }>;\n}) {\n  // get the chat ID from the URL\n  const { id } = await params;\n  // load the chat messages\n  const messages = await loadChat(id);\n\n  // list all chats\n  const chats = await listChats();\n\n  return (\n    <div id=\"ChatPersistenceIdPage\" className=\"max-w-4xl py-20\">\n      <div>\n        <a href=\"/chat-persistence\">New Chat</a>\n        <div className=\"chat-list\">\n          {chats && chats.length > 0 ? (\n            chats.map((chatId) => (\n              <div key={chatId} className=\"chat-item\">\n                <a href={`/chat-persistence/${chatId}`}>\n                  {`chat ${chatId}`}\n                  {chatId === id ? \" (current)\" : \" →\"}\n                </a>\n              </div>\n            ))\n          ) : (\n            <div className=\"no-chats\">chat history not found</div>\n          )}\n        </div>\n      </div>\n\n      <h1>Current:</h1>\n      <ChatBotPersistence id={id} initialMessages={messages} />\n    </div>\n  );\n}\n",
+      "type": "registry:page",
+      "target": "./app/(ai-demo)/chat-persistence/[id]/page.tsx"
+    }
+  ]
+}

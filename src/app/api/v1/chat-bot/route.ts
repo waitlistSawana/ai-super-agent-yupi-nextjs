@@ -10,9 +10,9 @@
  *
  */
 
-import { NextResponse, type NextRequest } from "next/server";
-import { streamText, type UIMessage } from "ai";
 import { dashscope } from "@/lib/ai/providers/dashscope";
+import { streamText, type UIMessage } from "ai";
+import { type NextRequest } from "next/server";
 
 // Allow streaming responses up to 30 seconds
 export const maxDuration = 30;

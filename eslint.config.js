@@ -46,6 +46,8 @@ export default tseslint.config(
         "error",
         { drizzleObjectName: ["db", "ctx.db"] },
       ],
+      // custom
+      "@next/next/no-html-link-for-pages": "warn",
     },
   },
   {

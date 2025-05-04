@@ -133,6 +133,47 @@
           "target": "./app/api/v1/object-generation/notification/route.ts"
         }
       ]
+    },
+    {
+      "name": "nextjs-chat-persistence-local",
+      "type": "registry:page",
+      "title": "NextJS Chat Bot with File-based Persistence",
+      "description": "A chat bot implementation with message persistence using local file system storage. Includes UI component, API endpoint, and file-based storage utilities. Perfect for development environments and demonstrations.",
+      "dependencies": [
+        "ai",
+        "@ai-sdk/react"
+      ],
+      "files": [
+        {
+          "path": "src/lib/ai/persistence/config.ts",
+          "type": "registry:lib",
+          "target": "./lib/ai/persistence/config.ts"
+        },
+        {
+          "path": "src/lib/ai/persistence/chat-store.ts",
+          "type": "registry:lib",
+          "target": "./lib/ai/persistence/chat-store.ts"
+        },
+        {
+          "path": "src/components/chat-bot-persistence.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/app/api/v1/chat-persistence/route.ts",
+          "type": "registry:page",
+          "target": "./app/api/v1/chat-persistence/route.ts"
+        },
+        {
+          "path": "src/app/(ai-demo)/chat-persistence/page.tsx",
+          "type": "registry:page",
+          "target": "./app/(ai-demo)/chat-persistence/page.tsx"
+        },
+        {
+          "path": "src/app/(ai-demo)/chat-persistence/[id]/page.tsx",
+          "type": "registry:page",
+          "target": "./app/(ai-demo)/chat-persistence/[id]/page.tsx"
+        }
+      ]
     }
   ]
 }

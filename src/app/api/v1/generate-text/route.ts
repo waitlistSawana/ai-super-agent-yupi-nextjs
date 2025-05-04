@@ -6,10 +6,9 @@
  * @see https://sdk.vercel.ai/docs/ai-sdk-core/generating-text
  * @see https://sdk.vercel.ai/cookbook/rsc/generate-text
  */
-import { NextResponse, type NextRequest } from "next/server";
 import { generateText } from "ai";
+import { NextResponse, type NextRequest } from "next/server";
 
-import { dashscope } from "@/lib/ai/providers/dashscope";
 import { sealos } from "@/lib/ai/providers/sealos";
 
 export interface GenerateTextPostRequestBody {
