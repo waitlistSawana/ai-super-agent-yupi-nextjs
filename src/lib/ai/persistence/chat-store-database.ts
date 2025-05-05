@@ -12,7 +12,7 @@
  *
  * Cache loaded data with next/cache, which is built-in functions
  * of Next.js.
- * It allow us to cache the results of expensive database queries.
+ * deprecated cache: It allow us to cache the results of expensive database queries.
  * You can build it yourself by connect a KV store.
  *
  * @see https://orm.drizzle.team/ - Drizzle ORM documentation
@@ -31,12 +31,6 @@ import { type Message } from "ai";
 import { db } from "@/server/db";
 import { chats, messages as messagesSchema } from "@/server/db/schema";
 import type { ChatInsert } from "@/server/db/types";
-import { revalidateTag, unstable_cache } from "next/cache";
-
-/**
- * helper functions to get cache tags
- */
-const cacheTagLoadMessages = (id: string) => `load-messages-${id}`;
 
 /**
  * Creates a new chat session in the database.
@@ -102,20 +96,10 @@ export async function listChats(): Promise<string[]> {
  * @returns {Promise<Message[]>} A promise that resolves to an array of Message objects
  */
 export async function loadChat(id: string): Promise<Message[]> {
-  // cache messages with next/cache
-  const cacheTag = cacheTagLoadMessages(id);
-  const cachedMessages = unstable_cache(
-    async () => {
-      return db.query.messages.findMany({
-        where: (messages, { eq }) => eq(messages.chatId, id),
-        orderBy: (messages, { asc }) => [asc(messages.createdAt)],
-      });
-    },
-    [cacheTag],
-    { revalidate: 60 * 60 },
-  );
-
-  const messages = await cachedMessages();
+  const messages = await db.query.messages.findMany({
+    where: (messages, { eq }) => eq(messages.chatId, id),
+    orderBy: (messages, { asc }) => [asc(messages.createdAt)],
+  });
 
   return messages.map((message) => ({
     id: message.id,
@@ -149,17 +133,16 @@ export async function saveChat({
   id: string;
   messages: Message[];
 }): Promise<void> {
-  // Invalidate caches after saving new messages
-  await invalidateChatMessagesCache(id);
   // history messages
   const historyMessages = await loadChat(id);
 
   // compare messages get diff messages
-  const newMessages = messages.filter((message) => {
-    return !historyMessages.some((historyMessage) => {
-      return historyMessage.id === message.id;
-    });
-  });
+  const existingMessageIds = new Set(
+    historyMessages.map((message) => message.id),
+  );
+  const newMessages = messages.filter(
+    (message) => !existingMessageIds.has(message.id),
+  );
   // write to database
   await db.insert(messagesSchema).values([
     ...newMessages.map((message) => ({
@@ -169,26 +152,12 @@ export async function saveChat({
       content: message.content,
       parts: message.parts,
       attachments: message.experimental_attachments,
-      // createdAt: message.createdAt,
+      createdAt:
+        message.createdAt instanceof Date
+          ? message.createdAt
+          : new Date(message.createdAt ?? Date.now()),
     })),
   ]);
-}
-
-/**
- * Invalidates the cache for a specific chat's messages.
- *
- * This function triggers a revalidation of the cache for messages
- * associated with a specific chat ID, ensuring that any changes
- * to the messages are reflected in the UI.
- *
- * @async
- * @function invalidateChatMessagesCache
- * @param {string} id - The unique identifier of the chat whose cache should be invalidated
- * @returns {Promise<void>} A promise that resolves when the cache is invalidated
- */
-export async function invalidateChatMessagesCache(id: string): Promise<void> {
-  const cacheTag = cacheTagLoadMessages(id);
-  revalidateTag(cacheTag);
 }
 
 /**
