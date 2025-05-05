@@ -8,6 +8,41 @@
       "when": 1745571836693,
       "tag": "0000_unknown_sunset_bain",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1746360372694,
+      "tag": "0001_gifted_ben_parker",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1746360397626,
+      "tag": "0002_late_venom",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1746377252215,
+      "tag": "0003_large_crystal",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1746387507726,
+      "tag": "0004_jazzy_golden_guardian",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1746387593027,
+      "tag": "0005_new_paper_doll",
+      "breakpoints": true
     }
   ]
 }

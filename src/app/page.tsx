@@ -274,6 +274,19 @@ export default function HomePage() {
                 to deploy it.
               </div>
             </Link>
+            <Link
+              className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 text-white hover:bg-white/20"
+              href="/chat-persistence-database"
+              // target="_blank"
+            >
+              <h3 className="text-2xl font-bold">
+                Chat Database Persistence →
+              </h3>
+              <div className="text-lg">
+                Learn more about Create T3 App, the libraries it uses, and how
+                to deploy it.
+              </div>
+            </Link>
           </div>
         </div>
       </div>

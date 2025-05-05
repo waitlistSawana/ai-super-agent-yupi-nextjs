@@ -150,7 +150,7 @@ const defaultOptions: RegistryListOptions = {
         "pnpm dlx shadcn@latest add https://ai-super-agent-yupi-nextjs.hsawana9.com/r/nextjs-object-generation-notification.json",
     },
     {
-      title: "聊天持久化组件",
+      title: "聊天持久化组件（文件系统）",
       description:
         "基于本地文件系统的聊天消息持久化实现，包含UI组件、API端点和文件存储工具。适合开发环境和演示使用，无需数据库即可保存聊天历史。",
       links: [
@@ -173,6 +173,31 @@ const defaultOptions: RegistryListOptions = {
       ],
       installCommand:
         "pnpm dlx shadcn@latest add https://ai-super-agent-yupi-nextjs.hsawana9.com/r/nextjs-chat-persistence-local.json",
+    },
+    {
+      title: "聊天持久化组件（数据库）",
+      description:
+        "基于数据库的聊天消息持久化实现，使用Drizzle ORM进行数据存储，包含UI组件、API端点和数据库存储工具。适合生产环境使用，通过缓存机制提升性能。",
+      links: [
+        {
+          text: "存储工具",
+          url: "https://github.com/waitlistSawana/ai-super-agent-yupi-nextjs/blob/main/src/lib/ai/persistence/chat-store-database.ts",
+        },
+        {
+          text: "后端代码",
+          url: "https://github.com/waitlistSawana/ai-super-agent-yupi-nextjs/blob/main/src/app/api/v1/chat-persistence-database/route.ts",
+        },
+        {
+          text: "前端组件",
+          url: "https://github.com/waitlistSawana/ai-super-agent-yupi-nextjs/blob/main/src/components/chat-bot-persistence-database.tsx",
+        },
+        {
+          text: "聊天页面",
+          url: "https://github.com/waitlistSawana/ai-super-agent-yupi-nextjs/blob/main/src/app/(ai-demo)/chat-persistence-database/[id]/page.tsx",
+        },
+      ],
+      installCommand:
+        "pnpm dlx shadcn@latest add https://ai-super-agent-yupi-nextjs.hsawana9.com/r/nextjs-chat-persistence-database.json",
     },
   ],
 };
