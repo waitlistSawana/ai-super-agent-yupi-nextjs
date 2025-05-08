@@ -199,6 +199,31 @@ const defaultOptions: RegistryListOptions = {
       installCommand:
         "pnpm dlx shadcn@latest add https://ai-super-agent-yupi-nextjs.hsawana9.com/r/nextjs-chat-persistence-database.json",
     },
+    {
+      title: "RAG 知识库聊天机器人",
+      description:
+        "基于 pgvector 和 PostgreSQL 实现的检索增强生成(RAG)聊天机器人，支持向量相似度搜索，包含UI组件、API端点和数据库工具，用于嵌入式存储和检索。",
+      links: [
+        {
+          text: "嵌入工具",
+          url: "https://github.com/waitlistSawana/ai-super-agent-yupi-nextjs/blob/main/src/lib/ai/embedding/rag-database.ts",
+        },
+        {
+          text: "服务端操作",
+          url: "https://github.com/waitlistSawana/ai-super-agent-yupi-nextjs/blob/main/src/actions/rag-database.ts",
+        },
+        {
+          text: "前端组件",
+          url: "https://github.com/waitlistSawana/ai-super-agent-yupi-nextjs/blob/main/src/components/rag-database.tsx",
+        },
+        {
+          text: "API端点",
+          url: "https://github.com/waitlistSawana/ai-super-agent-yupi-nextjs/blob/main/src/app/api/v1/rag-database/route.ts",
+        },
+      ],
+      installCommand:
+        "pnpm dlx shadcn@latest add https://ai-super-agent-yupi-nextjs.hsawana9.com/r/nextjs-rag-database-pgvector.json",
+    },
   ],
 };
 

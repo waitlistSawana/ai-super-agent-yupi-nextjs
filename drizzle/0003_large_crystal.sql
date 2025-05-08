@@ -1,1 +1,0 @@
-ALTER TABLE "ai-super-agent-yupi-nextjs_message" ADD COLUMN "content" text NOT NULL;

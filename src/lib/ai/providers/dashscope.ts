@@ -49,7 +49,7 @@ export interface DashscopeCompletionSettings
   dashscope?: string;
 }
 
-export type DashscopeEmbeddingModelId = string & {};
+export type DashscopeEmbeddingModelId = "text-embedding-v2" | (string & {});
 
 export interface DashscopeEmbeddingSettings
   extends OpenAICompatibleChatSettings {

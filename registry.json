@@ -5,6 +5,44 @@
   "author": "Sawana Huang <hsawana9@gmail.com>",
   "items": [
     {
+      "name": "nextjs-rag-database-pgvector",
+      "type": "registry:page",
+      "title": "NextJS RAG Chatbot with pgvector Database",
+      "description": "A Retrieval-Augmented Generation (RAG) chatbot implementation using pgvector and PostgreSQL for vector similarity search. Includes UI component, API endpoint, and database utilities for embedding storage and retrieval.",
+      "dependencies": [
+        "ai",
+        "@ai-sdk/react",
+        "drizzle-orm",
+        "zod"
+      ],
+      "files": [
+        {
+          "path": "src/lib/ai/embedding/rag-database.ts",
+          "type": "registry:lib",
+          "target": "./lib/ai/embedding/rag-database.ts"
+        },
+        {
+          "path": "src/actions/rag-database.ts",
+          "type": "registry:lib",
+          "target": "./actions/rag-database.ts"
+        },
+        {
+          "path": "src/components/rag-database.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/app/api/v1/rag-database/route.ts",
+          "type": "registry:page",
+          "target": "./app/api/v1/rag-database/route.ts"
+        },
+        {
+          "path": "src/app/(ai-demo)/rag-database/page.tsx",
+          "type": "registry:page",
+          "target": "./app/(ai-demo)/rag-database/page.tsx"
+        }
+      ]
+    },
+    {
       "name": "dashscrop-ai-provider",
       "type": "registry:lib",
       "title": "Dashscrop ai provider for ai sdk",

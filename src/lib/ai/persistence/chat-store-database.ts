@@ -49,13 +49,13 @@ export async function createChat(): Promise<string> {
   // ...
 
   // create new chat
-  const insertedChat = await db
+  const [insertedChat] = await db
     .insert(chats)
     .values({} as ChatInsert)
     .returning({
       id: chats.id,
     });
-  const id = insertedChat[0]?.id;
+  const id = insertedChat?.id;
 
   if (!id) {
     throw new Error("Failed to create chat");
